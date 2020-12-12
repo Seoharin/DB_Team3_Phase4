@@ -11,7 +11,7 @@
 </head>
 <body style="width:100%; height: 100%;">
 	<!-- 제목 div -->
-	<div class="searchtitle">
+	<div style="font-size:30px;text-align: center;">
 		<h1 >Input title to Search!</h1>
 	</div>
 	<div style="text-align:center; margin-left:250px;margin-right:250px;margin-bottom: 50px">
