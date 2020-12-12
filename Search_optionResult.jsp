@@ -7,7 +7,7 @@
 <meta charset="EUC-KR">
 <title>KNU MOVIE_TEAM3</title>
 </head>
-<body>
+<body style="margin-left:250px;margin-right:250px">
   <%
    String[] type = request.getParameterValues("type");
   
@@ -294,7 +294,9 @@
 		else { // titlelist에 있는 애들 select문 돌려서 결과 띄워주기
 			
 		%>
+			<div style="font-size:30px;text-align: center;">
 			<h1>검색 결과</h1>
+		    </div>
 			<form action = "showdetail.jsp" method = "POST">
 			
 			<%
@@ -307,7 +309,7 @@
 				rs = stmt.executeQuery(sql);
 				while (rs.next()) 
 				{
-			        out.println("<br><input type=\"radio\" name = \"id\" value = \"" +Integer.toString(rs.getInt("title_id")) + "\">" + rs.getString("title_id") +"  "+ rs.getString("title") + "</input>");
+			        out.println("<br><input type=\"radio\" name = \"title_id\" value = \"" +Integer.toString(rs.getInt("title_id")) + "\">" + rs.getString("title_id") +"  "+ rs.getString("title") + "</input>");
 					
 				}
 		    }
@@ -322,9 +324,9 @@
 	}
 	
    %>
-   	<div style="margin-top:20px;">
-	   <input type="submit" value="상세정보" onclick="location.href='showdetail.jsp'"/>
-	   <input type="button" value="취소" style=" text-align:center;"onclick="location.href='OptionSearch.jsp'"></input>
+   <div style="margin-top:20px; text-align: center;">
+	   <input type="submit" value="상세정보" style="width: 110px; height: 35px; font-size: 15px; text-align:center;"onclick="location.href='showdetail.jsp'"/>
+	   <input type="button" value="취소" style="width: 110px; height: 35px; font-size: 15px; text-align:center;"onclick="location.href='OptionSearch.jsp'"></input>
 	</div>
    </form>
 </body>
