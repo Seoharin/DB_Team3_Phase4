@@ -9,13 +9,13 @@
 	<link href="style.css" rel="stylesheet" type="text/css">
 	<title>Check option here</title>
 </head>
-<body style="width:100%; height: 100%;">
+<body style="margin-left:250px;margin-right:250px">
 	<!-- 제목 div -->
-	<div class="searchtitle">
+	<div style="font-size:30px;text-align: center;">
 		<h1 >Check options!</h1>
 	</div>
 	<!-- 옵션 3가지 div를 싸고 있는 div -->
-	<div style="align-content:center; margin-left:250px;margin-right:250px;margin-bottom: 50px">
+	<div style="align-content:center;margin-bottom: 50px">
 		<form action = "Search_optionResult.jsp" method = "POST">
 			<h3>TYPE</h3>
 			<div class="checkbox" name="types">
