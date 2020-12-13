@@ -97,10 +97,10 @@ OST : <input type = "text" name = "ost"><br>
 <input type = "button" value = "배우 추가" onclick = "location.href = 'addactor.jsp'">
 <input type = "button" value = "배우 삭제" onclick = "location.href = 'deleteactor.jsp'">
 <%
-/* if(type.equals("s"))
+ if(type.equals("s"))
 {
 	out.println("<input type = \"button\" value = \"에피소드 추가\" onclick = \"location.href = \'addepisode.jsp\'\">");
-} */
+}
 
 
 %> 
