@@ -1,18 +1,20 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ page language = "java" import ="java.text.*, java.sql.*,java.util.ArrayList"%>
 <!DOCTYPE html>
+	 
 <html>
 <head>
-<meta charset="EUC-KR">
-<title>»ó¼¼º¸±â</title>
+<meta charset="UTF-8">
+<title>ìƒì„¸ë³´ê¸°</title>
 </head>
 <body>
-<form  action="showactor.jsp" method = "POST">
+<form  action="rating.jsp" method = "POST">
 	<%
 	
 	String id= request.getParameter("title_id");
-	System.out.println(id);
+	String cus_id = (String)session.getAttribute("cus_id");
+	
 	String serverIP = "localhost";
 	String strSID = "orcl";
 	String portNum = "1521";
@@ -75,32 +77,32 @@
 	  }
 	switch(is_adult) {
 	  case"false" :
-		  is_adult = "Ã»¼Ò³â °ü¶÷ °¡´É";
+		  is_adult = "ì²­ì†Œë…„ ê´€ëŒ ê°€ëŠ¥";
 		  break;
 	  case"true":
-		  is_adult = "Ã»¼Ò³â °ü¶÷ ºÒ°¡";
+		  is_adult = "ì²­ì†Œë…„ ê´€ëŒ ë¶ˆê°€";
 		  break;
 	  }
 	 switch(hasclip) {
 	  case"false" :
-		  hasclip = "Å¬¸³¿µ»ó ¾øÀ½";
+		  hasclip = "í´ë¦½ì˜ìƒ ì—†ìŒ";
 		  break;
 	  case"true":
-		  hasclip = "Å¬¸³¿µ»ó ÀÖÀ½";
+		  hasclip = "í´ë¦½ì˜ìƒ ìˆìŒ";
 		  break;
 	  }
 	
 	 out.println("<br> Title : " +title+ "(" + is_adult + ")"+ " ");
-	 out.println("<br> Runtime : "+runtime_minute+" (ºĞ)");
+	 out.println("<br> Runtime : "+runtime_minute+" (ë¶„)");
 	 out.println("<br> Director : "+director+" ");
 	 out.println("<br> Writer : "+writer+" ");
 	 out.println("<br> Ost : "+ost+" ");
-	 out.println("<br> Audience : "+audience+" (¸¸¸í)");
+	 out.println("<br> Audience : "+audience+" (ë§Œëª…)");
 	 out.println("<br> "+hasclip+" ");
 	 
 	 
 	
-	  //movie ÀÇ ÆòÁ¡ ÀĞ¾î¿À±â 
+	  //movie ì˜ í‰ì  ì½ì–´ì˜¤ê¸° 
 	  try {
 		  conn.setAutoCommit(false);
 		  stmt = conn.createStatement();
@@ -126,7 +128,7 @@
 	  }
 	  out.println("<br> Score : "+score+" ");
 	  
-	  //movieÀÇ Àå¸£ ÀĞ¾î¿À±â 
+	  //movieì˜ ì¥ë¥´ ì½ì–´ì˜¤ê¸° 
 	 try {
 		  conn.setAutoCommit(false);
 		  stmt = conn.createStatement();
@@ -144,7 +146,7 @@
 		  System.exit(1);
 	  }
 	  
-	  //movieÀÇ version ÀĞ¾î¿À±â
+	  //movieì˜ version ì½ì–´ì˜¤ê¸°
 	  try {
 		  conn.setAutoCommit(false);
 		  stmt = conn.createStatement();
@@ -242,9 +244,9 @@
 	  switch(type) {
 	  case "s":
 		  out.println("<br> Type : TV Series");
-		  //½Ã¸®ÁîÀÇ °æ¿ì, ¿¡ÇÇ¼Òµå°¡ Á¸ÀçÇÔ...
+		  //ì‹œë¦¬ì¦ˆì˜ ê²½ìš°, ì—í”¼ì†Œë“œê°€ ì¡´ì¬í•¨...
 		  %>
-		  <input type = "button" value = "¿¡ÇÇ¼Òµå º¸±â" onclick = "location.herf = 'showepisode.jsp'">
+		  <input type = "button" value = "ì—í”¼ì†Œë“œ ë³´ê¸°" onclick = "location.href = 'showepisode.jsp'">
 		  <%
 		  out.println("");
 		  
@@ -259,23 +261,25 @@
   }
 	  
 	
-	  out.println("<br> Æò°¡ÇÏ±â");
-	  out.println("<select name = score>");
+	  out.println("<br> í‰ê°€í•˜ê¸°");
+	  out.println("<select name = \"score\" >");
 	  for(int i=1;i<=10;i++)
 	  {
 		  out.println("<option value = \""+i+"\" selected>"+i+"</option>");
 	  }
 	  out.println("</select>");
 	 
-	 	session.setAttribute("id",id);
-		//response.sendRedirect("showdetail.jsp");
+	 	session.setAttribute("title_id",id);
+	 	session.setAttribute("cus_id",cus_id);	
+	 	
+	 	
+		
 	 	%>
 	 	
-	 	<input type="button" value="Á¡¼öÁÖ±â" onclick = "location.href = 'showactor.jsp'">
+	 	<input type="submit" value="ì ìˆ˜ì£¼ê¸°" >
 	 	<br>
-	<input type="button" value="Ãâ¿¬¹è¿ìº¸±â" onclick = "location.href = 'showactor.jsp'">
-	
-
+		<input type="button" value="ì¶œì—°ë°°ìš°ë³´ê¸°" onclick = "location.href = 'showactor.jsp'">
+		
 </form>
 </body>
 </html>

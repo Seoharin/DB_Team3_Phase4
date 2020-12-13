@@ -1,15 +1,15 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
     <%@ page language = "java" import ="java.text.*, java.sql.*,java.util.ArrayList"%>
     
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
-<title>Ãâ¿¬ ¹è¿ì¸ñ·Ï</title>
+<meta charset="UTF-8">
+<title>ì¶œì—° ë°°ìš°ëª©ë¡</title>
 </head>
 <body>
-<h2> Ãâ¿¬ ¹è¿ì ¸ñ·Ï</h2>
+<h2> ì¶œì—° ë°°ìš° ëª©ë¡</h2>
 <br>
 
 <br>
@@ -27,7 +27,7 @@ ResultSet rs;
 Class.forName("oracle.jdbc.driver.OracleDriver");
 conn=DriverManager.getConnection(url,user,pass);
 String sql ="";
-String id = (String)session.getAttribute("id");
+String id = (String)session.getAttribute("title_id");
 ArrayList<Integer>actorlist = new ArrayList<>();
 ArrayList<String>actor_name = new ArrayList<>();
 ArrayList<String>Character_age = new ArrayList<>();
@@ -50,7 +50,7 @@ try {
 	  System.err.println("sql error = "+ex.getMessage());
 	  System.exit(1);
 }
-//movie¿¡ Ãâ¿¬ÇÑ actorµéÀÇ id¸¦ actorlist¿¡ ÀúÀå
+//movieì— ì¶œì—°í•œ actorë“¤ì˜ idë¥¼ actorlistì— ì €ì¥
 	
 try {
 	  conn.setAutoCommit(false);
@@ -76,7 +76,7 @@ try {
 	  System.exit(1);
 }
 
-//movie¿¡ Ãâ¿¬ÇÑ actorµéÀÇ id¸¦ actorlist¿¡ ÀúÀå
+//movieì— ì¶œì—°í•œ actorë“¤ì˜ idë¥¼ actorlistì— ì €ì¥
 try {
 	  conn.setAutoCommit(false);
 	  stmt = conn.createStatement();
@@ -96,7 +96,7 @@ try {
 	  System.err.println("sql error = "+ex.getMessage());
 	  System.exit(1);
 }
-//actor µéÀÇ ÀÌ¸§ ÀúÀå 
+//actor ë“¤ì˜ ì´ë¦„ ì €ì¥ 
 
  for(int i=0;i<actorlist.size();i++)
 		  
@@ -105,13 +105,13 @@ try {
 		  rname = Role_name.get(i);
 		  if(is_leading_role.get(i).equals("true"))
 		  {
-			  rname = rname +"(ÁÖ¿¬)";
+			  rname = rname +"(ì£¼ì—°)";
 		  }
 		  else
 		  {
-			  rname= rname + "(Á¶¿¬)";
+			  rname= rname + "(ì¡°ì—°)";
 		  }
-		  out.println("<br> ("+(i+1)+") ÀÌ¸§: "+actor_name.get(i)+", ÀÛÁß¿ªÇÒ: "+rname+", ÀÛÁß³ªÀÌ: "+Character_age.get(i)+", ÀÛÁß±¹Àû: "+Character_nationality.get(i)+" ");
+		  out.println("<br> ("+(i+1)+") ì´ë¦„: "+actor_name.get(i)+", ì‘ì¤‘ì—­í• : "+rname+", ì‘ì¤‘ë‚˜ì´: "+Character_age.get(i)+", ì‘ì¤‘êµ­ì : "+Character_nationality.get(i)+" ");
 		  
 	  }
 

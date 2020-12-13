@@ -1,13 +1,14 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ page language = "java" import ="java.text.*, java.sql.*"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 <title>KNU MOVIE_TEAM3</title>
 </head>
 <body>
+<form  action="MovieList.jsp" method = "POST">
 	<%
 	
 	String serverIP = "localhost";
@@ -16,13 +17,12 @@
 	String user = "university";
 	String pass = "comp322";
 	String url = "jdbc:oracle:thin:@"+serverIP+":"+portNum+":"+strSID;
-	
 	String inputid = request.getParameter("id");
 	String inputpw = request.getParameter("pw");
 	String sql= "";
-	
+	//out.println(inputid);
 	Connection conn = null;
-	Statement stmt;
+	Statement stmt=null;
 	ResultSet rs;
 	Class.forName("oracle.jdbc.driver.OracleDriver");
 	conn=DriverManager.getConnection(url,user,pass);
@@ -31,10 +31,11 @@
 	 try {
 		  conn.setAutoCommit(false);
 		  stmt = conn.createStatement();
-		 sql = "SELECT * FROM ACCOUNT WHERE Account_id = '"+inputid+"'";
-		 	rs = stmt.executeQuery(sql);
-		 //System.out.println(sql);
-		 
+		 sql = "SELECT * FROM ACCOUNT WHERE Account_id = '"+ inputid+"'";
+		 System.out.println(sql);	
+		 rs = stmt.executeQuery(sql);
+		 System.out.println(rs);
+
 		 if(rs.next())
 			{
 			 conn.setAutoCommit(false);
@@ -42,58 +43,52 @@
 			 sql = "SELECT password FROM ACCOUNT WHERE Account_id ='"
 					 +inputid+"'";
 			 ResultSet rs2 = stmt.executeQuery(sql);
+	
 			 String pw="";
 			 while(rs2.next()) {
 				 pw = rs2.getString(1);
 			 }
-			 
-			 if(pw.equals(inputpw)) {		//ºñ¹Ğ¹øÈ£ ¸ÂÀ¸¸é
+			
+			 if(pw.equals(inputpw)) {		//ë¹„ë°€ë²ˆí˜¸ ë§ìœ¼ë©´
 				 conn.setAutoCommit(false);
 				  stmt = conn.createStatement();
+				
 				 sql = "SELECT is_customer FROM ACCOUNT WHERE Account_id = '"
 						 +inputid+"'";
 				ResultSet rs3 = stmt.executeQuery(sql);
+				
 				 String iscustomer="";
 				 while(rs3.next())
 				 {
 					 iscustomer = rs3.getString(1);
 					 iscustomer = iscustomer.substring(0, 5);
 				 }
+				
 					if(iscustomer.equals("false")) { //when administer account
 						session.setAttribute("id",inputid);
 						response.sendRedirect("ManagerAccount.jsp");
-						%>
-						<script>
-						alter('°ü¸®ÀÚ°èÁ¤À¸·Î ·Î±×ÀÎ ÇÕ´Ï´Ù.')
-						location.herf = "ManagerAccount.jsp"
-						</script>
-						 <%
 						
 					}
 					else { //when customer account
 						session.setAttribute("id",inputid);
 						response.sendRedirect("MovieList.jsp");
-						%>
-						<script>
-						alter('·Î±×ÀÎ ¼º°ø.')
-						location.herf = "MovieList.jsp"
-						</script>
-						 <%
+						
 					}
 				}
-			 else { //ºñ¹Ğ¹øÈ£ Æ²¸®¸é 
-				 out.println("¾ÆÀÌµğ ¶Ç´Â ºñ¹Ğ¹øÈ£°¡ Æ²¸³´Ï´Ù.<br>");
+			 else { //ë¹„ë°€ë²ˆí˜¸ í‹€ë¦¬ë©´ 
+				 out.println("ì•„ì´ë”” ë˜ëŠ” ë¹„ë°€ë²ˆí˜¸ê°€ í‹€ë¦½ë‹ˆë‹¤.<br>");
 			 }
 			}
-			//DB¿¡ ÇØ´ç ACCOUNT °¡ ¾øÀ¸¸é 
+			//DBì— í•´ë‹¹ ACCOUNT ê°€ ì—†ìœ¼ë©´ 
 			else
 			{
-				out.println("¾ÆÀÌµğ ¶Ç´Â ºñ¹Ğ¹øÈ£°¡ Æ²¸³´Ï´Ù.<br>");
+				out.println("ì•„ì´ë”” ë˜ëŠ” ë¹„ë°€ë²ˆí˜¸ê°€ í‹€ë¦½ë‹ˆë‹¤.<br>");
 			}
 		 
 	  }catch(SQLException ex2) {					  
 		  System.exit(1);
 	  }
 	%>
+	</form>
 </body>
 </html>

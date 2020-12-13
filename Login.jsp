@@ -1,22 +1,28 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 <title>KNU MOVIE_TEAM3</title>
 </head>
 <body>
+<%
+ 
+
+%>
 	<form  action="logining.jsp" method = "POST">
 	<h1 style="text-align:center">KNU MOVIE DB - TEAM3 </h1>
 	ID : <input type = "text" name = "id">
 	<br>
-	PW :<input type = "password" name = "pw">
-	<input type = "submit" value = "·Î±×ÀÎ" >
+	PW : <input type = "password" name = "pw">
+	<input type = "submit" value = "ë¡œê·¸ì¸" >
 	<br>
 	<br>
-	<input type ="button"  value = "È¸¿ø°¡ÀÔ" onclick = "location.href = 'Join.jsp'">
-	<input type = "button" value = "ID/PWÃ£±â" onclick = "location.herf = 'find.jsp'">
+	<input type ="button"  value = "íšŒì›ê°€ìž…" onclick = "location.href = 'Join.jsp'">
+	<input type = "button" value = "IDì°¾ê¸°" onclick = "location.href = 'findid.jsp'">
+	<input type = "button" value = "PWì°¾ê¸°" onclick = "location.href = 'findpw.jsp'">
+	
 	</form>
 </body>
 </html>

@@ -1,19 +1,18 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ page language = "java" import ="java.text.*, java.sql.*"%>
 <%@ page language = "java" import = "java.util.ArrayList,javax.swing.JButton,javax.swing.ButtonGroup " %>
 
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 <title>KNU MOVIE_TEAM3</title>
 </head>
 <body>
 	<form  action="showdetail.jsp" method = "POST">
  	<%
-	String id = (String)session.getAttribute("id");
- 	out.println(id);
+	String cus_id = (String)session.getAttribute("id");
  	String serverIP = "localhost";
 	String strSID = "orcl";
 	String portNum = "1521";
@@ -28,7 +27,6 @@
 	ResultSet rs;
 	
 	
-	
 	Class.forName("oracle.jdbc.driver.OracleDriver");
 	conn=DriverManager.getConnection(url,user,pass);
 	
@@ -40,7 +38,7 @@
 		 String sql = "SELECT title_id, title FROM MOVIE"
 				+ " minus"
 				+ " SELECT title_id, title FROM MOVIE,RATING WHERE title_id ="
-				+ " MT_id AND Rate_id = '"+id+"'";
+				+ " MT_id AND Rate_id = '"+cus_id+"'";
 		
 		 rs = stmt.executeQuery(sql);
 		 int title_id;
@@ -50,7 +48,7 @@
 			 non_rate_movie.add(title_id);
 			 title_string = rs.getString(2);
 			 title.add(title_string);
-			 //Æò°¡ÇÏÁö ¾ÊÀº movieµéÀÇ title_id¸¦ arraylist non_rate_movie¿¡ ÀúÀå
+			 //í‰ê°€í•˜ì§€ ì•Šì€ movieë“¤ì˜ title_idë¥¼ arraylist non_rate_movieì— ì €ìž¥
 		 }
 		 
 		 rs.close();
@@ -59,13 +57,13 @@
 		System.err.println("sql error = "+ex2.getMessage());
 		System.exit(1);
 	}
-	 //»ç¿ëÀÚ ÀÌ¸§ ¹Þ¾Æ¿À±â
+	 //ì‚¬ìš©ìž ì´ë¦„ ë°›ì•„ì˜¤ê¸°
 	try {
 		 conn.setAutoCommit(false);
 		 stmt = conn.createStatement();
 		
 		
-		 String sql = "SELECT name FROM ACCOUNT WHERE Account_id = '"+id+"'";
+		 String sql = "SELECT name FROM ACCOUNT WHERE Account_id = '"+cus_id+"'";
 		 rs = stmt.executeQuery(sql);
 		 
 		 while(rs.next()) {
@@ -77,24 +75,27 @@
 		System.err.println("sql error = "+ex2.getMessage());
 		System.exit(1);
 	}
-	 out.println(username +"´Ô È¯¿µÇÕ´Ï´Ù!");
+	 out.println(username +"ë‹˜ í™˜ì˜í•©ë‹ˆë‹¤!");
 	%>
-	<input type = "submit" value = "¸¶ÀÌÆäÀÌÁö" onclick = "location.href = 'mypage.jsp'">
-	<input type = "submit" value = "·Î±×¾Æ¿ô" onclick = >
+	<input type = "button" value = "ë§ˆì´íŽ˜ì´ì§€" onclick = "location.href = 'mypage.jsp'">
+	<input type = "button" value = "ë¡œê·¸ì•„ì›ƒ" onclick = "location.href = 'Login.jsp'">
 	
 	<br>
-	<input type = "submit" value = "Á¦¸ñÀ¸·Î °Ë»öÇÏ±â" onclick = "location.href = 'Titlesearch.jsp'" >
-	<input type = "submit" value = "Á¶°ÇÀ¸·Î °Ë»öÇÏ±â" onclick = "location.href = 'Optionsearch.jsp'">
-	<input type = "submit" value = "ÃßÃµ¸ñ·Ï º¸±â" onclick = >
+	<input type = "button" value = "ì œëª©ìœ¼ë¡œ ê²€ìƒ‰í•˜ê¸°" onclick = "location.href = 'Titlesearch.jsp'" >
+	<input type = "button" value = "ì¡°ê±´ìœ¼ë¡œ ê²€ìƒ‰í•˜ê¸°" onclick = "location.href = 'Optionsearch.jsp'">
+	<input type = "button" value = "ì¶”ì²œëª©ë¡ ë³´ê¸°" onclick ="location.href = 'recommend.jsp'" >
 	
 	<% 
+	session.setAttribute("cus_id",cus_id);
 		for(int i=0; i<non_rate_movie.size();i++)
 		{
 			out.println("<br> <input type=\"radio\" name = \"title_id\" value = \""+ non_rate_movie.get(i)+"\">"+title.get(i)+"</input>");
 		}
+		
+		session.setAttribute("cus_id",cus_id);
 	%>
 	<br>
-	<input type = "submit" value = "¼¼ºÎ»çÇ× º¸±â" onclick = "location.href = 'showdetail.jsp'">
+	<input type = "submit" value = "ì„¸ë¶€ì‚¬í•­ ë³´ê¸°" onclick = "location.href = 'showdetail.jsp'">
 
 	</form>
 </body>
