@@ -60,7 +60,8 @@
 			System.err.println("sql error = " + ex2.getMessage());
 			System.exit(1);
 		}
-
+ 
+		
 		for (int i = 0; i < 5; i++) {
 			try {
 				conn.setAutoCommit(false);
@@ -95,23 +96,48 @@
 			System.err.println("sql error = " + ex2.getMessage());
 			System.exit(1);
 		}
-		for (int i = 0; i < 5; i++) {
-			try {
-				conn.setAutoCommit(false);
-				stmt = conn.createStatement();
-				sql = "select title from movie where title_id = " + title_id.get(i);
-				rs = stmt.executeQuery(sql);
-				while (rs.next()) {
-			title.add(rs.getString(1));
+		
+		if(title_id.size()<5)
+		{
+			for (int i = 0; i < title_id.size(); i++) {
+				try {
+					conn.setAutoCommit(false);
+					stmt = conn.createStatement();
+					sql = "select title from movie where title_id = " + title_id.get(i);
+					rs = stmt.executeQuery(sql);
+					while (rs.next()) {
+				title.add(rs.getString(1));
+					}
+					out.println("<br> <input type=\"radio\" name = \"title_id\" value = \"" + title_id.get(i) + "\">" + title.get(i)
+					+ "</input>");
+					rs.close();
+				} catch (SQLException ex2) {
+					System.err.println("sql error = " + ex2.getMessage());
+					System.exit(1);
 				}
-				out.println("<br> <input type=\"radio\" name = \"title_id\" value = \"" + title_id.get(i) + "\">" + title.get(i)
-				+ "</input>");
-				rs.close();
-			} catch (SQLException ex2) {
-				System.err.println("sql error = " + ex2.getMessage());
-				System.exit(1);
 			}
 		}
+		else
+		{
+			for (int i = 0; i < 5; i++) {
+				try {
+					conn.setAutoCommit(false);
+					stmt = conn.createStatement();
+					sql = "select title from movie where title_id = " + title_id.get(i);
+					rs = stmt.executeQuery(sql);
+					while (rs.next()) {
+				title.add(rs.getString(1));
+					}
+					out.println("<br> <input type=\"radio\" name = \"title_id\" value = \"" + title_id.get(i) + "\">" + title.get(i)
+					+ "</input>");
+					rs.close();
+				} catch (SQLException ex2) {
+					System.err.println("sql error = " + ex2.getMessage());
+					System.exit(1);
+				}
+			}
+		}
+		
 		title_id.clear();
 		title.clear();
 
@@ -135,21 +161,44 @@
 			System.err.println("sql error = " + ex2.getMessage());
 			System.exit(1);
 		}
-		for (int i = 0; i < 5; i++) {
-			try {
-				conn.setAutoCommit(false);
-				stmt = conn.createStatement();
-				sql = "select title from movie where title_id = " + title_id.get(i);
-				rs = stmt.executeQuery(sql);
-				while (rs.next()) {
-			title.add(rs.getString(1));
+		if(title_id.size()<5)
+		{
+			for (int i = 0; i < title_id.size(); i++) {
+				try {
+					conn.setAutoCommit(false);
+					stmt = conn.createStatement();
+					sql = "select title from movie where title_id = " + title_id.get(i);
+					rs = stmt.executeQuery(sql);
+					while (rs.next()) {
+				title.add(rs.getString(1));
+					}
+					out.println("<br> <input type=\"radio\" name = \"title_id\" value = \"" + title_id.get(i) + "\">" + title.get(i)
+					+ "</input>");
+					rs.close();
+				} catch (SQLException ex2) {
+					System.err.println("sql error = " + ex2.getMessage());
+					System.exit(1);
 				}
-				out.println("<br> <input type=\"radio\" name = \"title_id\" value = \"" + title_id.get(i) + "\">" + title.get(i)
-				+ "</input>");
-				rs.close();
-			} catch (SQLException ex2) {
-				System.err.println("sql error = " + ex2.getMessage());
-				System.exit(1);
+			}
+		}
+		else
+		{
+			for (int i = 0; i < 5; i++) {
+				try {
+					conn.setAutoCommit(false);
+					stmt = conn.createStatement();
+					sql = "select title from movie where title_id = " + title_id.get(i);
+					rs = stmt.executeQuery(sql);
+					while (rs.next()) {
+				title.add(rs.getString(1));
+					}
+					out.println("<br> <input type=\"radio\" name = \"title_id\" value = \"" + title_id.get(i) + "\">" + title.get(i)
+					+ "</input>");
+					rs.close();
+				} catch (SQLException ex2) {
+					System.err.println("sql error = " + ex2.getMessage());
+					System.exit(1);
+				}
 			}
 		}
 		title_id.clear();

@@ -1,17 +1,17 @@
-
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
-<%@ page language = "java" import ="java.text.*, java.sql.*, java.util.ArrayList"%>
+	pageEncoding="EUC-KR"%>
+<%@ page language="java"
+	import="java.text.*, java.sql.*, java.util.ArrayList"%>
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="EUC-KR" />
-    <title>KNU MOVIE_TEAM3</title>
+<meta charset="EUC-KR" />
+<title>KNU MOVIE_TEAM3</title>
 </head>
-
-<body style="margin-left:200px;margin-right:200px;text-align:center">
-    <%
-
+<form action = "middle.jsp" method = "POST">
+<body
+	style="margin-left: 200px; margin-right: 200px; text-align: center">
+	<%
     String serverIP = "localhost";
     String strSID = "orcl";
     String portNum = "1521";
@@ -20,17 +20,17 @@
     String url = "jdbc:oracle:thin:@"+serverIP+":"+portNum+":"+strSID;
 	String sql="";
 	
-	String id = (String)session.getAttribute("id"); // ÏÇ¨Îûåid Î∞õÏïÑÏò¥.
+	String id = (String)session.getAttribute("manager_id"); // ªÁ∂˜id πﬁæ∆ø».
 	String name="";
-	ArrayList<Integer> titlelist = new ArrayList<Integer>();
+	ArrayList<Integer> titleidlist = new ArrayList<Integer>();
+	ArrayList<String>titlelist = new ArrayList<String>();
+	ArrayList<String> score = new ArrayList<String>();
 	String avgscore="";
 	
     Connection conn = null;
     Statement stmt=null;
     Class.forName("oracle.jdbc.driver.OracleDriver");
     conn=DriverManager.getConnection(url,user,pass);
-
-
     try {
         conn.setAutoCommit(false);
         stmt = conn.createStatement();
@@ -46,17 +46,17 @@
     	//System.err.println("sql error = "+ex.getMessage());
    		 System.exit(1);
     }
-
     %>
-    
-    <div style="text-align:center;">
-        <h2>Í¥ÄÎ¶¨Ïûê: <%=name%></h2>
-    </div>
-	<form>
-	    <div>
-	        <h4>ÎÇ¥Í∞Ä Ïò¨Î¶∞ ÏòÅÏÉÅÎ¨º</h4>
-	        <div style="border:solid;border-color:black;">
-	<%
+
+	<div style="text-align: center;">
+		<h2>
+			∞¸∏Æ¿⁄:
+			<%=name%></h2>
+	</div>
+		<div>
+			<h4>≥ª∞° ø√∏∞ øµªÛπ∞</h4>
+			<div style="border: solid; border-color: black;">
+				<%
 	            try {
 	                conn.setAutoCommit(false);
 	                stmt = conn.createStatement();
@@ -64,47 +64,78 @@
 	                ResultSet rs = stmt.executeQuery(sql);
 	                while(rs.next())
 	                {
-	               		titlelist.add(rs.getInt("title_id"));
+	               		titleidlist.add(rs.getInt(1));
+	               		titlelist.add(rs.getString(2));
 	                }
+	                }catch(SQLException ex)
+		            {
+		            	System.err.println("sql error = "+ex.getMessage());
+		            	System.exit(1);
+		            }
 	                
-	              //Í¥ÄÎ¶¨ÏûêÍ∞Ä Ïò¨Î¶∞ ÏòÅÏÉÅÎ¨ºÎì§Ïùò title_id Î•º titlelistÏóê Îã¥Ïùå
+	              //∞¸∏Æ¿⁄∞° ø√∏∞ øµªÛπ∞µÈ¿« title_id ∏¶ titlelistø° ¥„¿Ω
 	
 	
-	              //titlelist Ïóê ÏûàÎäî Ïï†Îì§Ïùò title_id, title, ÌèâÏ†êÏùÑ Î≥¥Ïó¨Ï§å
-	                System.out.println("titlelist size:"+titlelist.size());
-	                for(int i=0; i<titlelist.size();i++)
-	                {
-	                	conn.setAutoCommit(false);
-	                	stmt = conn.createStatement();
-	                	sql = "select  Mt_id, AVG(Score) from movie, rating where Mt_id="+titlelist.get(i)+"group by Mt_id";
-	                	rs = stmt.executeQuery(sql);
-	                	while (rs.next()) 
-	                	{
-	                		avgscore = rs.getString(2);
-	                        out.println("<br><input type=\"radio\" name = \"id\" value = \"" + Integer.toString(rs.getInt("Mt_id")) + "\">"  +"  "+avgscore+ "</input>");
-	                		
-	                	}
-	                }
-	                session.setAttribute("manager_id",id);
-	                
+	              //titlelist ø° ¿÷¥¬ æ÷µÈ¿« title_id, title, ∆Ú¡°¿ª ∫∏ø©¡‹
+	               // System.out.println("titlelist size:"+titlelist.size());
+	              
+	              
+	              
+	              for(int i =0; i<titleidlist.size();i++)
+	              {
+	            	  try {
+	  	                conn.setAutoCommit(false);
+	  	                stmt = conn.createStatement();
+	  	              sql = "select  Mt_id, AVG(Score) from rating where Mt_id = "+titleidlist.get(i)+" group by Mt_id";
+	  	                ResultSet rs = stmt.executeQuery(sql);
+	  	                if(rs.next())
+	  	                {
+	  	                	 String rate = rs.getString(2);
+	  	          
+	  						  if(rate.length()>4)
+	  						  {
+	  							  
+	  							rate = rate.substring(0,3);
+	  							 score.add(rate);
+	  							 
+	  						  }
+	  						  else
+	  						  {
+	  							 score.add(rate);
+	  						  }
+	 
+	  	                }
+	  	                else{
+	  	                	score.add("0");
+	  	                }
+	  	                
+	  	             
+	  	                }catch(SQLException ex)
+	  		            {
+	  		            	System.err.println("sql error = "+ex.getMessage());
+	  		            	System.exit(1);
+	  		            }
+	              }
+	              
+	              for(int i =0; i<titleidlist.size();i++)
+	              {
+	            	  out.println("<br> <input type=\"radio\" name = \"id\" value = \"" + titleidlist.get(i) + "\">"+ titlelist.get(i)  +" : "+score.get(i)+ "</input>");
+	          
+	              }
+	              
+	              session.setAttribute("manager_id",id);
+	              
 	
-	            } catch(SQLException ex)
-	            {
-	            	System.err.println("sql error = "+ex.getMessage());
-	            	System.exit(1);
-	            }
+	              
 	
 	%>
-	
-	        </div>
-	    </div>
+
+			</div>
+		</div>
 		<div>
-		
-		
-			<input type="submit" value="ÏòÅÏÉÅÏ†ïÎ≥¥ÏàòÏ†ï"  >
-			<input type="submit" value="ÌèâÍ∞ÄÎÇ¥Ïó≠Î≥¥Í∏∞" >
-			<input type="button" value="ÏÉàÎ°úÏö¥ÏòÅÏÉÅÎì±Î°ù" onclick="location.href='addmovie.jsp'">
-			<input type="button" value="Î°úÍ∑∏ÏïÑÏõÉ" onclick="location.href='Login.jsp'">
+				<input type="submit" value="∞¸∏Æ"> 
+				<input type="button" value="ªı∑ŒøÓøµªÛµÓ∑œ" onclick="location.href='addmovie.jsp'"> 
+				<input type="button" value="∑Œ±◊æ∆øÙ" onclick="location.href='Login.jsp'">
 		</div>
 	</form>
 

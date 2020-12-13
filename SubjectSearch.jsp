@@ -10,7 +10,7 @@
 	<title>Insert title here</title>
 </head>
 <body style="width:100%; height: 100%;">
-	<!-- ì œëª© div -->
+	<!-- Á¦¸ñ div -->
 	<div style="font-size:30px;text-align: center;">
 		<h1 >Input title to Search!</h1>
 	</div>
@@ -19,7 +19,7 @@
 			<div style="text-align:center; margin-bottom:30px;">
 				<input type="text" style=" width:700px; height:30px;"name="title">
 			</div>
-			<!-- ì¡°íšŒ ë²„íŠ¼ -->
+			<!-- Á¶È¸ ¹öÆ° -->
 			<div style="text-align:center;">
 				<input style="width: 110px; height: 35px; font-size: 15px; text-align:center;" type="submit" value="search" />
 			</div>

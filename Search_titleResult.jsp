@@ -26,19 +26,17 @@
    ResultSet rs;
    Class.forName("oracle.jdbc.driver.OracleDriver");
    conn=DriverManager.getConnection(url,user,pass);
-  // out.println("ë””ë¹„ ì—°ê²° ì„±ê³µ");
-
+  // out.println("µğºñ ¿¬°á ¼º°ø");
 	try {
 		
-		if (title==null)//ì•„ë¬´ê²ƒë„ ì²´í¬ ì•ˆí–ˆìœ¼ë©´
+		if (title==null)//¾Æ¹«°Íµµ Ã¼Å© ¾ÈÇßÀ¸¸é
 		{
 			 %>
             <script>
-            alter('ì œëª©ì„ ì…ë ¥í•´ì£¼ì„¸ìš”.')
+            alter('Á¦¸ñÀ» ÀÔ·ÂÇØÁÖ¼¼¿ä.')
             location.href="SubjectSearch.jsp"
             </script>
              <%
-
 		}
 		
 		
@@ -55,10 +53,10 @@
 		
 		
 		
-		 // titlelistì— ìˆëŠ” ì• ë“¤ selectë¬¸ ëŒë ¤ì„œ ê²°ê³¼ ë„ì›Œì£¼ê¸°
+		 // titlelist¿¡ ÀÖ´Â ¾Öµé select¹® µ¹·Á¼­ °á°ú ¶ç¿öÁÖ±â
 		
 		%><div style="font-size:30px;text-align: center;">
-			<h1>ê²€ìƒ‰ ê²°ê³¼</h1>
+			<h1>°Ë»ö °á°ú</h1>
 		    </div>
 			<form action = "showdetail.jsp" method = "POST">
 			
@@ -88,8 +86,8 @@
 	
    %>
    	<div style="margin-top:20px; text-align: center;">
-	   <input type="submit" value="ìƒì„¸ì •ë³´" style="width: 110px; height: 35px; font-size: 15px; text-align:center;"onclick="location.href='showdetail.jsp'"/>
-	   <input type="button" value="ì·¨ì†Œ" style="width: 110px; height: 35px; font-size: 15px; text-align:center;"onclick="location.href='OptionSearch.jsp'"></input>
+	   <input type="submit" value="»ó¼¼Á¤º¸" style="width: 110px; height: 35px; font-size: 15px; text-align:center;"onclick="location.href='showdetail.jsp'"/>
+	   <input type="button" value="Ãë¼Ò" style="width: 110px; height: 35px; font-size: 15px; text-align:center;"onclick="location.href='OptionSearch.jsp'"></input>
 	</div>
    </form>
 </body>

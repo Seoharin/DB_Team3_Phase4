@@ -8,7 +8,10 @@
 </head>
 <body>
 <%
- 
+ String idcheck = "false";
+ String id = "";
+ session.setAttribute("key", idcheck);
+ session.setAttribute("id",id);
 
 %>
 	<form  action="logining.jsp" method = "POST">

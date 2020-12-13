@@ -10,11 +10,11 @@
 	<title>Check option here</title>
 </head>
 <body style="margin-left:250px;margin-right:250px">
-	<!-- ì œëª© div -->
+	<!-- Á¦¸ñ div -->
 	<div style="font-size:30px;text-align: center;">
 		<h1 >Check options!</h1>
 	</div>
-	<!-- ì˜µì…˜ 3ê°€ì§€ divë¥¼ ì‹¸ê³  ìžˆëŠ” div -->
+	<!-- ¿É¼Ç 3°¡Áö div¸¦ ½Î°í ÀÖ´Â div -->
 	<div style="align-content:center;margin-bottom: 50px">
 		<form action = "Search_optionResult.jsp" method = "POST">
 			<h3>TYPE</h3>
@@ -47,7 +47,7 @@
 				<input type="checkbox" name="ver" value="5">Chinese</input>
 				<input type="checkbox" name="ver" value="6">French</input>
 			</div>
-			<!-- ì¡°íšŒ ë²„íŠ¼ -->
+			<!-- Á¶È¸ ¹öÆ° -->
 			<div style="text-align:center;">
 				<input style="width: 110px; height: 35px; font-size: 15px; text-align:center;" type="submit" value="search" />
 			</div>

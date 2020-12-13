@@ -65,7 +65,7 @@
 				 }
 				
 					if(iscustomer.equals("false")) { //when administer account
-						session.setAttribute("id",inputid);
+						session.setAttribute("manager_id",inputid);
 						response.sendRedirect("ManagerAccount.jsp");
 						
 					}

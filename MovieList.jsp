@@ -81,12 +81,12 @@
 	<input type = "button" value = "로그아웃" onclick = "location.href = 'Login.jsp'">
 	
 	<br>
-	<input type = "button" value = "제목으로 검색하기" onclick = "location.href = 'Titlesearch.jsp'" >
+	<input type = "button" value = "제목으로 검색하기" onclick = "location.href = 'SubjectSearch.jsp'" >
 	<input type = "button" value = "조건으로 검색하기" onclick = "location.href = 'Optionsearch.jsp'">
 	<input type = "button" value = "추천목록 보기" onclick ="location.href = 'recommend.jsp'" >
 	
 	<% 
-	session.setAttribute("cus_id",cus_id);
+	
 		for(int i=0; i<non_rate_movie.size();i++)
 		{
 			out.println("<br> <input type=\"radio\" name = \"title_id\" value = \""+ non_rate_movie.get(i)+"\">"+title.get(i)+"</input>");
