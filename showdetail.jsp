@@ -69,6 +69,10 @@
 			  
 			  //System.out.println(title);
 		  }
+		  System.out.println(id);
+		  System.out.println(startyear);
+		  System.out.println(endyear);
+		  System.out.println("뿌");
 		  rs.close();
 	  }catch(SQLException ex)
 	  {
@@ -163,15 +167,16 @@
 		  System.exit(1);
 	  }
 	  
-	  if(endyear==null)
+	
+	  if(endyear == null)
 	  {
 		  startyear = startyear.substring(0,10);
 		  year = startyear;
 	  }
 	  else
 	  {
-		 startyear = startyear.substring(0,9);
-		 endyear = endyear.substring(0,9);
+		 startyear = startyear.substring(0,10);
+		 endyear = endyear.substring(0,10);
 		  year = startyear+"~"+endyear;
 	  }
 		 
